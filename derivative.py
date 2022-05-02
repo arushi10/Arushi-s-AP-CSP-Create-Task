@@ -3,7 +3,7 @@ import sympy as sp
 
 def driver():
   # get user input for expression to differentiate
-  var = input("Enter expression to differentiate: ")
+  var = input("Enter expression to differentiate. For example, sin(x):")
   
   class Derivative:
     def __init__(self):

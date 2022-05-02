@@ -3,59 +3,76 @@ import hypotenuse
 import derivative
 import distance
 
-# menu options as a dictionary
-menu_options = {
-    1: 'Find Hypotenuse Length',
-    2: 'Find the Derivative',
-    3: 'Find the Distance',
-    4: 'exit',
-}
 
-# print menu options from dictionary key/value pair
-def print_menu() -> object:
-    for key in menu_options.keys():
-        print(key, '--', menu_options[key] )
-    runOptions()
+# color codes used to change font color (this code segment was developed using an online resource)
+class bcolors:
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    ENDC = '\033[0m'
 
-    
-# menu option 1
-def option1():
-    print('You chose \' 1 -  Hypotenuse\'')
-    hypotenuse.driver()
 
-# menu option 2
-def option2():
-    print('You chose \' 2 - Derivative\'')
-    derivative.driver()
+# menu options as a list [prompts, action]
+# procedure references will be executed directly file.procedure()
+main_menu = [
+    [bcolors.OKBLUE + "Hypotenuse" + bcolors.ENDC, hypotenuse.driver],
+    [bcolors.OKGREEN + "Derivative" + bcolors.ENDC, derivative.driver],
+    [bcolors.OKCYAN + "Distance" + bcolors.ENDC, distance.driver],
+]
 
-# menu option 3
-def option3():
-    print('You chose \'3 - Distance\'')
-    distance.driver()
+# menu banner (this code segment was developed using an online resources)
+border = "=" * 25
+banner = f"\n{border}\nWelcome to the Easy Calculator! Please select an option\n{border}"
 
-# call procedures based on user input
-def runOptions():
-  # setting while loop condition to be true
-  n = 0
-  # while loop to accept/process user menu choice
-  while (n == 0):
-    try:
-      option = int(input('Enter your choice 1-4: '))
-      if option == 1:
-        option1()
-      elif option == 2:
-        option2()
-      elif option == 3:
-        option3()
-      elif option == 4:
-        # setting while loop condition to be false
-        n = 1
-      else:
+
+# creates main menu
+def menu():
+    title = "Calculator Home" + banner
+    # copy() returns a shallow copy of the list
+    menu_list = main_menu.copy()
+    buildMenu(title, menu_list)
+
+
+def buildMenu(title, menu_list):
+    # menu banner
+    print(title)
+    # builds a dictionary from menu_list
+    prompts = {0: ["Exit", None]}
+    for row in menu_list:
+        index = len(prompts)
+        prompts[index] = row
+
+    # print menu (dictionary)
+    # items() returns a view object that contains key-value pairs
+    for key, value in prompts.items():
+        print(key, '->', value[0])
+
+    while True:
+        # get user choice
+        choice = input("Type your choice: ")
+        try:
+            # convert choice to number
+            choice = int(choice)
+            break
+        except ValueError:
+            # reprompt user if input is not an integer
+            print('Invalid input. Please enter an integer input.')
+            # recursion, start menu over again
+            buildMenu(title, menu_list)
+
+    if choice == 0:
+        # stop
+        return
+    elif (choice < 0 or choice > 3):
         # reprompt user if input is not an integer between 1 and 4
-        print('Invalid option. Please enter a number between 1 and 4.')
-    except ValueError:
-      # reprompt user if input is not an integer
-      print('Invalid input. Please enter an integer input.')
+        print('Invalid option. Please enter a number between 0 and 3.')
+    else:
+        # get() returns the value of the item with the specified key
+        action = prompts.get(choice)[1]
+        action()
+        # recursion, start menu over again
+        buildMenu(title, menu_list)
 
-if __name__=='__main__':
-    print_menu()
+
+if __name__ == "__main__":
+    menu()
