@@ -7,7 +7,7 @@ def driver():
     def __init__(self):
       pass
         
-  # finds hypotenuse using pythagorean theorem
+  # finds hypotenuse using Pythagorean Theorem
     def __call__(self, sidea, sideb):
        hype = ((sidea**2) + (sideb**2))**0.5
        return hype
@@ -16,6 +16,6 @@ def driver():
     # object instantiation and run __init__ method
       hypotenuse_of = Hypotenuse() 
     # object running __call__ method
-      print(hypotenuse_of(sidea, sideb)) 
+      print("answer =", hypotenuse_of(sidea, sideb)) 
     
   run()

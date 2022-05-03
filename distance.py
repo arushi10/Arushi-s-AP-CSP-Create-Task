@@ -12,7 +12,7 @@ def driver():
     def __init__(self):
       pass
         
-  # finds distance using distance formula
+  # find distance using distance formula
     def __call__(self, x1, y1, x2, y2):
       answer = math.sqrt((x2-x1)**2 + (y2-y1)**2)
       return answer
@@ -21,6 +21,6 @@ def driver():
     # object instantiation and run __init__ method
       distance_of = Distance() 
     # object running __call__ method
-      print(distance_of(x1, y1, x2, y2)) 
+      print("answer =", distance_of(x1, y1, x2, y2)) 
     
   run()

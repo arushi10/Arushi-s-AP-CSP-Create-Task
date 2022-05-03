@@ -4,13 +4,15 @@ import derivative
 import distance
 
 
-# color codes used to change font color (this code segment was developed using an online resource)
+# color codes used to change font color
+# start cited code
+# (https://stackoverflow.com/questions/287871/how-do-i-print-colored-text-to-the-terminal-in-python)
 class bcolors:
     OKBLUE = '\033[94m'
     OKCYAN = '\033[96m'
     OKGREEN = '\033[92m'
     ENDC = '\033[0m'
-
+# end cited code
 
 # menu options as a list [prompts, action]
 # procedure references will be executed directly file.procedure()
@@ -20,7 +22,7 @@ main_menu = [
     [bcolors.OKCYAN + "Distance" + bcolors.ENDC, distance.driver],
 ]
 
-# menu banner (this code segment was developed using an online resources)
+# menu banner
 border = "=" * 25
 banner = f"\n{border}\nWelcome to the Easy Calculator! Please select an option\n{border}"
 
@@ -64,7 +66,7 @@ def buildMenu(title, menu_list):
         # stop
         return
     elif (choice < 0 or choice > 3):
-        # reprompt user if input is not an integer between 1 and 4
+        # reprompt user if input is not an integer between 0 and 3
         print('Invalid option. Please enter a number between 0 and 3.')
     else:
         # get() returns the value of the item with the specified key
